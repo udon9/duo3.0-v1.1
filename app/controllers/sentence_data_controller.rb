@@ -1,0 +1,2 @@
+class SentenceDataController < ApplicationController
+end

@@ -1,0 +1,48 @@
+
+<% unless current_user.full_profile? %>
+  <header class="header_top panel panel-default col-lg-12 no-profile">
+    <h2>まずは、あなたの基本プロフィールを登録しましょう！</h2>
+    <%= link_to "プロフィールを登録する", edit_user_path(current_user), { class: "btn btn-lg btn-primary withripple" } %>
+  </header>
+<% else %>
+  <%= current_user.nickname %> さん
+
+
+  <table border="3">
+    <tr>
+      <th>チェック</th>
+      <th>lesson</th>
+      <th>学習</th>
+      <th>演習</th>
+      <th>復習</th>
+    </tr>
+    <% current_user.lessons.each.with_index(1)  do |lesson, num| %>
+      <tr>
+        <td>
+          <%= check_box_tag '', '', lesson.check_mark, {'data-id' => lesson.id, 'data-user_id' => lesson.user_id} %>
+        </td>
+        <td><%= num %></td>
+        <td><%= link_to 'スタート', root_path %></td>
+        <td><%= link_to 'スタート', root_path %></td>
+        <td><%= link_to 'スタート', root_path %> (<%= SentenceStatus.where(lesson_id: num, review_status: true).count %>) <%= link_to 'リセット', root_path %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>
+
+
+
+
+
+
+Article.find(123).users.count(:group => "users.name")
+
+
+<script>
+$(function() {
+    $("input[type=checkbox]").click(function() {
+        $.post('/users/'+$(this).data('user_id')+'/lessons/'+$(this).data('id')+'/toggle');
+    });
+});
+</script>

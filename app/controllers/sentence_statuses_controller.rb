@@ -1,0 +1,2 @@
+class SentenceStatusesController < ApplicationController
+end
