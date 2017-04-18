@@ -22,7 +22,7 @@
           <%= check_box_tag '', '', lesson.check_mark, {'data-id' => lesson.id, 'data-user_id' => lesson.user_id} %>
         </td>
         <td><%= num %></td>
-        <td><%= link_to 'スタート', root_path %></td>
+        <td><%= link_to 'スタート', sentence_datum_path(num * 10 - 9) %></td>
         <td><%= link_to 'スタート', root_path %></td>
         <td><%= link_to 'スタート', root_path %> (<%= SentenceStatus.where(lesson_id: num, review_status: true).count %>) <%= link_to 'リセット', root_path %></td>
       </tr>
@@ -30,13 +30,6 @@
   </table>
 
 <% end %>
-
-
-
-
-
-
-Article.find(123).users.count(:group => "users.name")
 
 
 <script>

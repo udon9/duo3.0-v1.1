@@ -15,11 +15,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
   def additional_task
-    for num1 in 0..55 do
-      lesson = Lesson.new(user_id: @user.id, check_mark: false)
+    for num1 in 1..56 do
+      lesson = Lesson.new(user_id: @user.id, check_mark: false, lesson_number: num1)
       lesson.save
       for num2 in 1..10 do
-        sdi = num1 * 10 + num2
+        sdi = (num1 - 1)* 10 + num2
         SentenceStatus.create(user_id: @user.id, lesson_id: lesson.id, sentence_datum_id: sdi, review_status: false )
       end
     end

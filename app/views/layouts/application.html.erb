@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" ng-app>
 <head>
   <meta charset='utf-8'>
   <title>Duo3.0 例文暗記</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render partial: 'common/header' %>
-<%= yield %>
+
+  <%= render partial: 'common/header' %>
+  <%= yield %>
 
 </body>
 </html>

@@ -56,4 +56,6 @@ gem 'mechanize'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-material-design', '0.1.4'
 gem 'paperclip'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 0.2.3'
 
