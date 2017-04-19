@@ -3,15 +3,26 @@
 ・{{sentence}}<br>
 ・<%= @sentence_datum.japanese_sentence %><br>
 <input type="text" ng-model="sentence">
-<div id="hoge" ng-if="sentence === '<%= @english_sentence_another %>'">
+<div id="match" ng-if="sentence === '<%= @english_sentence_another %>'">
   <p>一致！([Enter]で次)</p>
 </div>
 
 
 <script>
+
+(function(){
+  if (<%= params[:id] %> % 10 == 1) {
+    if (window.name != "reloadFlag") {
+      window.location.reload();
+      window.name = "reloadFlag";
+    } else {
+      window.name = "notReloadFlag";
+    }
+  }
+})();
 $(document).ready(function(){
   $(window).keydown(function(){
-    if ($('#hoge').css('display') == 'block') {
+    if ($('#match').css('display') == 'block') {
       if (<%= params[:id] %> % 10 != 0) {
         window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1).to_s %>;
       } else {
