@@ -3,15 +3,20 @@
 ・{{sentence}}<br>
 ・<%= @sentence_datum.japanese_sentence %><br>
 <input type="text" ng-model="sentence">
-<div id="hoge" ng-show="sentence == '<%= @sentence_datum.english_sentence %>'">一致！([Enter]で次)</div>
+<div id="hoge" ng-if="sentence === '<%= @english_sentence_another %>'">
+  <p>一致！([Enter]で次)</p>
+</div>
 
 
 <script>
 $(document).ready(function(){
   $(window).keydown(function(){
     if ($('#hoge').css('display') == 'block') {
-      $.post('/sentence_data/'+<%= params[:id] %>+'/next_movement');
-      console.log(location);
+      if (<%= params[:id] %> % 10 != 0) {
+        window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1).to_s %>;
+      } else {
+        window.location.href = "http://localhost:3000";
+      }
     }
   });
 });

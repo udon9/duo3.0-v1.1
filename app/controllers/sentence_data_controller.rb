@@ -1,10 +1,9 @@
 class SentenceDataController < ApplicationController
   def show
     @sentence_datum = SentenceDatum.find(params[:id])
-  end
-
-  def next_movement
-    @hoge = params[:id].to_i + 1
-    redirect_to "/sentence_data/#{@hoge}"
+    @english_sentence_another = @sentence_datum.english_sentence.dup
+    @english_sentence_another.gsub!(/'/) do |m|
+      '\\' + m
+    end
   end
 end
