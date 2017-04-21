@@ -1,34 +1,17 @@
 <%= @sentence_datum.id %>.<br>
-・<%= @sentence_datum.english_sentence %><br>
-・{{sentence}}<br>
+・<span class="english_sentence"><%= @sentence_datum.english_sentence %></span><br>
+・<input class="form-text" id="form-text" type="text" autofocus><br>
 ・<%= @sentence_datum.japanese_sentence %><br>
-<input type="text" ng-model="sentence">
-<div id="match" ng-if="sentence === '<%= @english_sentence_another %>'">
-  <p>一致！([Enter]で次)</p>
-</div>
 
 
 <script>
-
-(function(){
-  if (<%= params[:id] %> % 10 == 1) {
-    if (window.name != "reloadFlag") {
-      window.location.reload();
-      window.name = "reloadFlag";
+$(window).keyup(function(){
+  if ($("#form-text").val() === '<%= @english_sentence_another.html_safe %>') {
+    if (<%= params[:id] %> % 10 != 0) {
+      window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1).to_s %>;
     } else {
-      window.name = "notReloadFlag";
+      window.location.href = "http://localhost:3000";
     }
   }
-})();
-$(document).ready(function(){
-  $(window).keydown(function(){
-    if ($('#match').css('display') == 'block') {
-      if (<%= params[:id] %> % 10 != 0) {
-        window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1).to_s %>;
-      } else {
-        window.location.href = "http://localhost:3000";
-      }
-    }
-  });
 });
 </script>

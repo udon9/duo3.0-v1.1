@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+.english_sentence {
+  font-size: 17px;
+  font-family: sans-serif;
+  padding: 0px;
+}
+
+.form-text {
+  border:none;
+  border-bottom:1px dotted #333;
+  font-size: 17px;
+  font-family: sans-serif;
+  width: 90%;
+}
+
+input[type="text"]:focus {
+  outline: 0;
+  padding: 0px;
+}
