@@ -23,7 +23,7 @@
         <td><%= num %></td>
         <td><%= link_to 'スタート', sentence_datum_path(num * 10 - 9) %></td>
         <td><%= link_to 'スタート', sentence_status_path(num * 10 - 9) %></td>
-        <td><%= link_to 'スタート', root_path %> (<%= SentenceStatus.where(lesson_id: num, review_status: true).count %>) <%= link_to 'リセット', root_path %></td>
+        <td><%= link_to 'スタート', sentence_status_path(num * 10 - 9) %> (<%= SentenceStatus.where(lesson_id: num, review_status: true).count %>) <%= link_to 'リセット', lesson_path(num), method: :put, data: {confirm: "本当に削除しますか？"}  %></td>
       </tr>
     <% end %>
   </table>
