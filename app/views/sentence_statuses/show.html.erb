@@ -2,8 +2,7 @@
 ・<span class="english_sentence" id="english_sentence" style="color: red; display: none;"><%= @sentence_datum.english_sentence %></span><br>
 ・<input class="form-text" id="form-text" type="text" autofocus><br>
 ・<%= @sentence_datum.japanese_sentence %><br>
-<!-- <button id='answer_button'>答える</button> -->
-<%= button_to "答える", remote: true, {'data-id' => params[:id], 'data-lesson_id' => @sentence_status.lesson_id }, id: 'answer_button' %>
+<button id='answer_button'>答える</button>
 
 <script>
 $('#answer_button').click(function(){
@@ -13,13 +12,13 @@ $('#answer_button').click(function(){
     }
     alert('正解!!!!');
     if (<%= params[:id] %> % 10 != 0) {
-      window.location.href = "http://localhost:3000/sentence_statuses/"+<%= (params[:id].to_i + 1).to_s %>;
+      window.location.href = "http://localhost:3000/sentence_statuses/"+<%= (params[:id].to_i + 1) %>;
     } else {
       window.location.href = "http://localhost:3000";
     }
   } else {
-    $.post('/lessons/'+$(this).data('lesson_id')+'/sentence_statuses/'+$(this).data('id')+'/ftoggle');
-    // $.post('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/ftoggle');
+    // $.post('/lessons/'+$(this).data('lesson_id')+'/sentence_statuses/'+$(this).data('id')+'/ftoggle');
+    $.post('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/ftoggle');
     alert('不正解');
     $("#english_sentence").css("display","inline-block");
   }
