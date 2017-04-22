@@ -1,0 +1,16 @@
+現在の成績
+
+<% @sentence_statuses.each do |sen| %>
+  <%= sen.sentence_datum.id %>.
+  <% if sen.review_status == true %>
+    <p style="color: red; display:inline;">正解</p><br>
+  <% else %>
+    <p style="color: blue; font-weight: bold; display:inline;">不正解</p><br>
+  <% end %>
+  <%= sen.sentence_datum.english_sentence %><br>
+  <%= sen.sentence_datum.japanese_sentence %><br>
+  <br><br><br>
+<% end %>
+
+
+<%= link_to "戻る", root_path %>

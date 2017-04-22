@@ -8,7 +8,7 @@
 $(window).keyup(function(){
   if ($("#form-text").val() === '<%= @english_sentence_another.html_safe %>') {
     if (<%= params[:id] %> % 10 != 0) {
-      window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1).to_s %>;
+      window.location.href = "http://localhost:3000/sentence_data/"+<%= (params[:id].to_i + 1) %>;
     } else {
       window.location.href = "http://localhost:3000";
     }
