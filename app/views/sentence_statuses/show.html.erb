@@ -2,31 +2,31 @@
 ・<span class="english_sentence" id="english_sentence" style="color: red; display: none;"><%= @sentence_datum.english_sentence %></span><br>
 ・<input class="form-text" id="form-text" type="text" autofocus><br>
 ・<%= @sentence_datum.japanese_sentence %><br>
-<button id='answer_button'>答える</button>
+<button id='answer_button' style="visibility: visible;">答える</button>
 
 <script>
 $('#answer_button').click(function(){
   if ($("#form-text").val() === '<%= @english_sentence_another.html_safe %>') {
-    if ($("#english_sentence").css("display") == "none") {
-      $.post('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/ttoggle');
-    }
+    $.post('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/ttoggle');
     alert('正解!!!!');
-    if (<%= params[:id] %> % 10 != 0) {
-      window.location.href = "http://localhost:3000/sentence_statuses/"+<%= (params[:id].to_i + 1) %>;
-    } else {
-      window.location.href = "http://localhost:3000/lessons/"+<%= @sentence_status.lesson_id %>;
-    }
+    $.get('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/next');
   } else {
-    // $.post('/lessons/'+$(this).data('lesson_id')+'/sentence_statuses/'+$(this).data('id')+'/ftoggle');
     $.post('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/ftoggle');
     alert('不正解');
     $("#english_sentence").css("display","inline-block");
+    $("#answer_button").css("visibility","hidden");
   }
 });
 
 $('#form-text').on("keydown", function(e) {
-  if(e.keyCode === 13) {
+  if(e.keyCode === 13 && $("#answer_button").css("visibility") == "visible") {
     $('#answer_button').trigger("click");
+  }
+});
+
+$(window).keyup(function(){
+  if ($("#form-text").val() === '<%= @english_sentence_another.html_safe %>' && $("#answer_button").css("visibility") == "hidden") {
+    $.get('/lessons/'+<%= @sentence_status.lesson_id %>+'/sentence_statuses/'+<%= params[:id] %>+'/next');
   }
 });
 </script>
